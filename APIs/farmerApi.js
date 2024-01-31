@@ -18,6 +18,7 @@ userApp.use(exp.json())
 userApp.post('/register',multerObj.single('photo'),expressAsyncHandler(async (request,response)=>{
    //get user collection
    const farmercollectionObj=request.app.get("farmercollectionObj")
+   console.log(request.body)
   //get new user
   const newUser=JSON.parse(request.body.user);
   //check for duplicate user by username
@@ -100,5 +101,7 @@ userApp.post('/login',expressAsyncHandler(async(request,response)=>{
       }
    }
 }))
+
+
  
 module.exports=userApp;

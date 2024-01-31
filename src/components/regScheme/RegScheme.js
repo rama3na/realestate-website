@@ -2,16 +2,14 @@ import React,{ useState,useEffect } from 'react'
  
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
-import './General.css'
+import { useNavigate } from 'react-router-dom' 
 import { Outlet } from 'react-router-dom'
 import { useContext } from 'react'
-import { loginContext } from '../../contexts/loginContext';
-
+import { loginContext } from '../../contexts/loginContext';  
 
  
 
-function General() {
+function RegScheme() {
 
     
     let [currentUser,loginErr,userLoginStatus,loginUser,logoutUser,setScheme,scheme]=useContext(loginContext)
@@ -21,13 +19,15 @@ function General() {
     let [err,seterror]=useState("")
 
     let addLandData=(data1)=>{ 
-        axios.post("http://localhost:3500/land-api/add-land",data1)
+        data1['schemeName']=scheme.SchemeName 
+        data1['schemeimage']=scheme.image
+        data1['currentUser']=currentUser.username 
+        console.log(data1) 
+        axios.post("http://localhost:3500/regScheme-api/post-land",data1)
         .then(response=>{
             console.log("response is",response)
             if(response.status===201){
                 navigate("/UserProfile");
-             
-              
             }
             else{
                 seterror(response.data.message)
@@ -44,9 +44,8 @@ function General() {
         })
     }
 
-    const onFileSelect=(e)=>{
-        setSelectFile(e.target.files[0])
-    }
+  
+  
 
   return (
     <div className='general' >
@@ -55,30 +54,19 @@ function General() {
         <div className="row ">
             <div className="col-sm-8 col-xl-10 col-md-6 mx-auto border shadow bg-white mt-5  border-shadow px-4 py-4">
                 <form onSubmit={handleSubmit(addLandData)} >
-                    {/*Title */}
-                    <div className="title">
-                        <label htmlFor="title">Title :</label>
-                        <input type="text"
-                         id='title'
-                         className='form-control mt-3 mb-2'
-                         {...register("title",{required:"True"})}
-
-                        />
-                        {errors.title?.type==='required' && <p className='text-ddanger'>*this field is required</p> }
-
-                    </div>
-                    {/*Transaction type */}
+                    
+                    {/*land type */}
                     <div className="transaction">
-                        <label htmlFor="transaction">Transaction type : </label>
+                        <label htmlFor="transaction">Land type : </label>
                         <select {...register('transaction',{required:"True"})} id="transaction" defaultValue='select...' >
-                            <option value="rent">rent</option>
-                            <option value="lease">lease</option>
+                            <option value="rent">own</option>
+                            <option value="lease">rent</option>
                             
                          </select>
  
                         
+                        {errors.own?.type==='required' && <p className='text-danger'>*this field is required</p> }
                         {errors.rent?.type==='required' && <p className='text-danger'>*this field is required</p> }
-                        {errors.lease?.type==='required' && <p className='text-danger'>*this field is required</p> }
                         
                     </div>
                     {/*no of owners */}
@@ -119,18 +107,7 @@ function General() {
                         {errors.UOM?.type==='required' && <p className='text-ddanger'>*this field is required</p> }
                         
                     </div>
-                     {/*Expected price*/}
-                    <div className="ExpectedPrice">
-                        <label htmlFor="Price">Expected Price :</label>
-                        <input type="text"
-                         id='price'
-                         className='form-control mt-3 mb-2'
-                         {...register("price",{required:"True"})}
-
-                        />
-                        {errors.price?.type==='required' && <p className='text-ddanger'>*this field is required</p> }
-                        
-                    </div>
+                    
                      {/*Address*/}
                     <div className="address">
                         <label htmlFor="address">Address :</label>
@@ -211,59 +188,12 @@ function General() {
                         
                     </div>
 
-
-                     {/*soilType*/}
-                     <div className="soilType">
-                        <label htmlFor="soilType">soil Type :</label>
-                        <input type="text"
-                         id='soilType'
-                         className='form-control mt-3 mb-2'
-                         {...register("soilType",{required:"True"})}
-
-                        />
-                        {errors.soilType?.type==='required' && <p className='text-danger'>*this field is required</p> }
-                        
-                    </div>
-
-                     {/*TubeWells*/}
-                     <div className="TubeWells">
-                        <label htmlFor="TubeWells">No of TubeWells :</label>
-                        <input type="number"
-                         id='TubeWells'
-                         className='form-control mt-3 mb-2'
-                         {...register("TubeWells",{required:"True"})}
-
-                        />
-                        {errors.TubeWells?.type==='required' && <p className='text-danger'>*this field is required</p> }
-                        
-                    </div>
-
-                     {/*Roads*/}
-                     <div className="Roads">
-                        <label htmlFor="Roads"> No of Roads :</label>
-                        <input type="number"
-                         id='Roads'
-                         className='form-control mt-3 mb-2'
-                         {...register("Roads",{required:"True"})}
-
-                        />
-                        {errors.Roads?.type==='required' && <p className='text-danger'>*this field is required</p> }
-                        
-                    </div>
+ 
+                    
                      {/*land documents*/}
-                    <div>
-                    <label htmlFor="name">upload land images :</label>
-                        <input type="file"
-                        id='image'
-                        placeholder='url'
-                        className='form-control mt-3'
-                        {...register("image",{required:'True'})}
-                        onInput={onFileSelect}
-                        />
-                        {errors.image?.type==='required' && <p className='text-danger'>*this field is required</p>}
-                    </div>
+                    
 
-                     <button className="btn btn-danger text-center mx-auto" type='submit'>Save</button>
+                     <button className="btn btn-danger text-center mx-auto" type='submit'  >Save</button>
 
  
                 </form>
@@ -276,4 +206,4 @@ function General() {
   )
 }
 
-export default General
+export default RegScheme

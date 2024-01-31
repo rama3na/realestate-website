@@ -3,18 +3,18 @@ import '../allcss/Footer.css'
 import { BsInstagram } from 'react-icons/bs'
 import {FiTwitter} from 'react-icons/fi'
 import { BsLinkedin } from 'react-icons/bs'
+import { FcLandscape } from "react-icons/fc";
 function Footer() {
   return (
-    <div className=' footer '>
+    <div className=' footer bg-black text-white '>
       <div className="row   px-3 py-3">
        {/*company logo */}
           <div className="col-sm-3">
+            <h2><FcLandscape /> Dream Land</h2>
 
           </div>
           {/*About Us */}
-          <div className="col-sm-3 text-white">
-          We’re reimagining how you buy, sell and rent. It’s now easier to get into a place you love. So let’s do this, together.
-          </div>
+          <div className="col-sm-3 text-white">we prioritize user satisfaction and uphold integrity in every transaction. Our commitment to transparency and reliability ensures a seamless real estate experience for all users. For inquiries or assistance, reach out to our dedicated support team. Thank you for choosing us as your trusted land transaction partner.</div>
           {/*company*/}
           <div className="col-sm-3"> 
           <ul className='about'>

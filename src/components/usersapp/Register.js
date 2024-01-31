@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import '../allcss/Register.css'
 import {useForm} from 'react-hook-form'
 import {  useNavigate} from 'react-router-dom'
-import axios from 'axios'
+import axios from 'axios' 
 function Register() {
    
   let {register,handleSubmit,formState:{errors}}=useForm()
@@ -17,12 +17,10 @@ let addnewuser=(newuser)=>{
   fd.append("user",JSON.stringify(newuser))
   //append slelected file to form data
   fd.append("photo",selectedFile)
-
   // console.log(newuser);
   //save user info
   axios.post("http://localhost:3500/user-api/register",fd)
   .then(response=>{
-
     console.log("response is ",response)
     if(response.status===201){
       //navigate('/Users');
@@ -51,18 +49,18 @@ let addnewuser=(newuser)=>{
     }
 
   return (
-    <div> 
+    <div className='register'> 
        
       {err.length!==0 && <p className='text-danger'>{err}</p>}
 
       
-      <div className='mt-5 mb-3 mx-auto text-center justify-content-center' >
-            <img src="https://media.licdn.com/dms/image/D5612AQH2jniupqjJ9Q/article-inline_image-shrink_1500_2232/0/1685163001914?e=1691020800&v=beta&t=8o4mt-muaL6TxvHN0ogUwvS6vatp-7kFgLNLJx0dGwc" className='logo '   alt="" />
-            <h5 className='mx-auto text-center justify-content-center mt-3'>"Farming is not just a JOB.It is a way of LIFE" <br /> Our mission is to simplify the digital agriculture for <br />famers in rural india </h5>
+      <div className='  mb-3 mx-auto text-center justify-content-center' >
+            <img src="https://media.istockphoto.com/id/1333123192/photo/close-up-photo-of-female-farmers-hands-using-laptop-next-to-combine-harvester-machine.jpg?s=612x612&w=0&k=20&c=KItVw0SBK8INIBSEUphnhq3PvlKk4FBLDeh6n81v-5c=" className='logo '   alt="" />
+            <h5 className='mx-auto text-center justify-content-center mt-3 text-white'>"Farming is not just a JOB.It is a way of LIFE" <br /> Our mission is to simplify the digital agriculture for <br />famers in rural india </h5>
       </div>
       <div className="row">
        
-            <div className="col-sm-8 col-11 col-md-6 mx-auto border bg-secondary px-4 py-4 ">
+            <div className="col-sm-8 col-11 col-md-6 mx-auto border text-white px-4 py-4 ">
                 <form onSubmit={handleSubmit(addnewuser)}>
                 <h3 className='float-left'>Farmer Registration</h3>
                   <label htmlFor="username">username</label>
@@ -114,8 +112,15 @@ let addnewuser=(newuser)=>{
                   />
                   {errors.imageUrl?.type==='required' && <p className='text-danger'>*this field is required</p>}
                 
-                  <button className='btn btn-danger mt-3' type='submit'>Register</button>
                   
+                  <label htmlFor='userType'>choose user type</label>
+                  <select className='form-select mt-3' name="cars" id="userType" {...register("userType",{required:'True'})}>
+                      <option value="choose default" selected disabled>choose user type</option>
+                      <option value="admin">Admin</option>
+                      <option value="user">User</option>
+                  </select>
+                  {errors.userType?.type==='required' && <p className='text-danger'>*this field is required</p>}
+                  <button className='btn btn-danger mt-3' type='submit'>Register</button>
                 </form>
               </div>
  

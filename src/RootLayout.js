@@ -11,9 +11,9 @@ function RootLayout() {
     <div  >
           <Outlet/>
     </div>
- 
+     {
     <Footer style={{minHeight:'100vh'}}/>
-   
+   }
     </div>
   )
 }

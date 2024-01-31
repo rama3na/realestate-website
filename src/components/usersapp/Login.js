@@ -21,19 +21,19 @@ let {register,handleSubmit,formState:{errors}}=useForm()
   }
 useEffect(()=>{
   if(userLoginStatus==true){
-    navigate("/UserProfile")
+    navigate("/")
   }
 },[userLoginStatus])
  
 
   return (
     <div className='login '> 
-      <h3 className='text-center'>Login</h3>
+      <h3 className='text-center text-white '>Login</h3>
       {loginErr.length !==0 && (<p className='text-danger text-center justify-content-center'>{loginErr}</p>) }
       <div className="row">
         <div className="col-sm-8 col-11 col-md-6 mx-auto border mt-5 mb-5 px-3 py-3">
           <form onSubmit={handleSubmit(handleSubmitUser)} >
-            <label htmlFor="email">email</label>
+            <label htmlFor="email" className='text-white'>email</label>
             <input
              type="email"
              id='email' 
@@ -42,7 +42,7 @@ useEffect(()=>{
              {...register("email",{required:"True"})}
             />
             {errors.email?.type==='required' && <p className="text-danger ">*this field is required</p> }
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password" className='text-white' >Password</label>
             <input type="password" 
             id='password'
              placeholder='password'

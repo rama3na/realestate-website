@@ -6,7 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import { ModalTitle } from 'react-bootstrap';
 import './Data.css'
 import { useState } from 'react';
-const Data = ({price,title,place,suitablecrop,phone,image1,image2,image3})=> {
+const Data = ({price,title,address,SuitableCrop,phone,image1,image2,image3})=> {
 
   let {register,handleSubmit,formState:{errors},setValue,getValues}=useForm()
   let [show,setshow]=useState(false)
@@ -42,7 +42,7 @@ const Data = ({price,title,place,suitablecrop,phone,image1,image2,image3})=> {
             </div>
                 <div className="carousel-inner">
                   <div className="carousel-item active" data-bs-interval="1000">
-                    <img src={image1} className="d-block w-100" height='277px' alt="..."/>
+                    <img src={image1} className="d-block w-100" height='275px' alt="..."/>
                   </div>
                   <div className="carousel-item" data-bs-interval="1000">
                     <img src={image2} className="d-block w-100" height='275px' alt="..." />
@@ -65,9 +65,9 @@ const Data = ({price,title,place,suitablecrop,phone,image1,image2,image3})=> {
             </div>
             <div className="col-sm-6   bg-light">
                <h4 className=' text-danger d-inline' >{price}</h4>
-               <p  className='text-black-50'> <b> {title}</b> </p>
-               <p><CiLocationOn/> {place}</p>
-               <p>{suitablecrop}</p>
+               <p  className='text-black-50'> <b> {title}</b> </p> 
+               <p><CiLocationOn/> {address}</p>
+               <p>{SuitableCrop}</p>
                <button className="btn btn-success float-start" onClick={()=>editdata()}><BiPhoneCall/> Request Call</button>
                <Modal show={show}
                     onHide={closeModal}

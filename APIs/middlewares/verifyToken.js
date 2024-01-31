@@ -5,7 +5,7 @@ const jwt=require("jsonwebtoken")
 const verifyToken=(request,response,next)=>{
   //get bearer token
   const bearerToken=request.headers.authorization;//bearer token
-  //if token is not found
+  //if token ias not found
   if(bearerToken===undefined){
      response.send({message:"unauthorized access..plz login first"}) 
   }

@@ -2,11 +2,13 @@ import axios from 'axios';
 import React from 'react'
 import { useState } from 'react'
 import { loginContext } from './loginContext';
+
 function UserLoginStore({children}) {
     
     const [currentUser,setCurrentUser]=useState({});
     const [loginErr,setLoginErr]=useState("")
     const [userLoginStatus,setUserLoginStatus]=useState(false)
+    const [scheme,setScheme]=useState([])
     //function to make user login request
     const loginUser=(userCredObj)=>{
         
@@ -35,11 +37,12 @@ function UserLoginStore({children}) {
     const logoutUser=()=>{
         localStorage.clear()
         setUserLoginStatus(false)
+        currentUser.userType=""
     }
 
     return (
     <div> 
-        <loginContext.Provider value={[currentUser,loginErr,userLoginStatus,loginUser,logoutUser]}>
+        <loginContext.Provider value={[currentUser,loginErr,userLoginStatus,loginUser,logoutUser,setScheme,scheme]}>
             {children}
         </loginContext.Provider>
     </div>
